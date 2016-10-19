@@ -23,8 +23,20 @@ class ToDoListTableViewController: UITableViewController {
         }
     }
     
+    func deleteCompletedTodos() {
+        for i in 0..<toDoItems.count {
+            let todo = toDoItems[i]
+            if todo.completed {
+                if (Int(Date().timeIntervalSince(todo.completionDate as! Date) / 3600) >= 24) {
+                    self.toDoItems.remove(at: i)
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        deleteCompletedTodos()
     }
 
     override func didReceiveMemoryWarning() {
